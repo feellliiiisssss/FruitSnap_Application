@@ -15,6 +15,10 @@
         "description": "Find out more about us",
         "url": "http://swagger.io"
       }
+    },
+    {
+      "name": "auth",
+      "description": "Operations about authentication"
     }
   ],
   "schemes": [
@@ -22,6 +26,44 @@
     "http"
   ],
   "paths": {
+    "/auth/login": {
+        "post": {
+          "tags": [
+            "auth"
+          ],
+          "summary": "User login",
+          "description": "Authenticate user with username and password",
+          "operationId": "loginUser",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User credentials",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/AuthRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/AuthResponse"
+              }
+            },
+            "400": {
+              "description": "Invalid username/password supplied"
+            }
+          }
+        }
+      },
     "/pet/{petId}/uploadImage": {
       "post": {
         "tags": [
@@ -443,6 +485,33 @@
         }
       }
     },
+    "AuthRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ]
+      },
+      "AuthResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "expiresIn": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
     "Predict": {
       "type": "object",
       "properties": {
