@@ -8,6 +8,12 @@ import json
 from authorization.exceptions import APIException
 from authorization.middleware import require_authentication
 import config.config
+from werkzeug.utils import secure_filename
+import tensorflow as tf 
+from PIL import Image
+import numpy as np
+import uuid
+import io
 
 version_api = 'v1'
 
@@ -68,20 +74,62 @@ def verify_token():
         return jsonify({'message': 'Token has expired'}), 401
     except jwt.InvalidTokenError:
         return jsonify({'message': 'Invalid token'}), 401
-    
+
+############### PREDICT ROUTE AND CONFIGURATION #################
+# UPLOAD_FOLDER = 'uploads'
+# if not os.path.exists(UPLOAD_FOLDER):
+#     os.makedirs(UPLOAD_FOLDER)
+
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+def preprocess_image(image_bytes):
+    image = Image.open(io.BytesIO(image_bytes)).convert('RGB')
+    image = image.resize((224, 224))
+    image = np.array(image) / 255.0  # Normalize to [0, 1]
+    image = np.expand_dims(image, axis=0)  # Add batch dimension
+    return image
+
 @app.route('/predict', methods=['POST'])
-@require_authentication
+# @require_authentication
 def predict_image():
-    # get image request
+    try :
+        # load model from file (local) -> done
+        # get image request
+        if 'image' not in request.files:
+            return jsonify({'status': 'fail', 'message': 'No image part in the request'}), 400
+        
+        file = request.files['image']
+        
+        if file.filename == '':
+            return jsonify({'status': 'fail', 'message': 'No selected file'}), 400
+        
+        if file:
+            image_bytes = file.read()
+            image_tensor = preprocess_image(image_bytes)
 
-    # load model from file (local)
+        # predict image with model already loaded
+        prediction = model.predict(image_tensor)
+        print(prediction)
 
-    # predict image with model already loaded
+        return jsonify({ 'message': 'Image has already been predicted', 'statusCode': 200 }), 200
+    except:
+        # error
+        raise APIException('Could not predict image', 401)
 
-    # error
-    # raise APIException('Could not predict image', 401)
 
-    return jsonify({ 'message': 'Image has already been predicted', 'statusCode': 200 }), 200
+def load_model():
+    model_path = 'model/FruitSnap_model.h5'
+    print('Loading model from:', model_path)
+    try:
+        model = tf.keras.models.load_model(model_path)
+        print('Model loaded successfully')
+        return model
+    except Exception as error:
+        print('Failed to load model:', error)
+        raise error
+    
+############### PREDICT ROUTE AND CONFIGURATION #################
 
 if __name__ == "__main__":
+    model = load_model()
     app.run(debug=True)
