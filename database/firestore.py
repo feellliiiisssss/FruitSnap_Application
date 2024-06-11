@@ -1,8 +1,9 @@
 from google.cloud import firestore
 import os
+import config.config
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./credentials.json"
-# Initialize Firestore client
+
 db = firestore.Client(database=os.getenv("APP_DATABASE"))
 
 def add_data(collection, document, data):
