@@ -7,9 +7,11 @@ from flask_swagger_ui import get_swaggerui_blueprint
 import json
 from authorization.exceptions import APIException
 from authorization.middleware import require_authentication
+import config.config
+
+version_api = 'v1'
 
 app = Flask(__name__)
-app.config.from_file("./config/config.json", load=json.load)
 
 SWAGGER_URL = '/api/docs'  
 API_URL = "/swagger/v1.json"   
@@ -32,7 +34,7 @@ def handle_exception(error):
 
 @app.route("/")
 def index_page():
-    return jsonify({'message': 'Welcome to our official API', 'statusCode': 200 }), 200
+    return jsonify({'message': 'Welcome to our official API', 'statusCode': 200}), 200
 
 @app.route('/swagger/v1.json')
 def swagger_spec():

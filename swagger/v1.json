@@ -9,16 +9,12 @@
   "basePath": "/v1",
   "tags": [
     {
-      "name": "fruit",
-      "description": "Everything about your fruit",
-      "externalDocs": {
-        "description": "Find out more about us",
-        "url": "http://swagger.io"
-      }
-    },
-    {
       "name": "auth",
       "description": "Operations about authentication"
+    },
+    {
+      "name": "fruit",
+      "description": "Everything about your fruit"
     }
   ],
   "schemes": [
