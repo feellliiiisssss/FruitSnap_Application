@@ -67,7 +67,7 @@ def verify_token():
     except jwt.InvalidTokenError:
         return jsonify({'message': 'Invalid token'}), 401
     
-@app.route('/predict', methdos=['POST'])
+@app.route('/predict', methods=['POST'])
 @require_authentication
 def predict_image():
     # get image request
