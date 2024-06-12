@@ -9,7 +9,7 @@ db = firestore.Client(database=os.getenv("APP_DATABASE"))
 def add_data(collection, document, data):
     print(db)
     doc_ref = db.collection(collection).document(document)
-    doc_ref.set(data)
+    doc_ref.set(data, merge=True)
     print("Document {} added successfully!".format(document))
 
 def delete_data(collection, document):
