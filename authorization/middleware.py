@@ -19,7 +19,7 @@ class AuthMiddleware:
         auth_token = request.headers.get('Authorization')
 
         if not auth_token or not self.is_valid_token(auth_token):
-            raise APIException('Unauthorized', 401)
+            raise APIException('Unauthorized', 403)
         
         data = jwt.decode(auth_token, os.getenv('SECRET_KEY'), algorithms=["HS256"])
         return data

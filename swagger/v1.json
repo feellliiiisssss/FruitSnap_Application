@@ -6,7 +6,6 @@
     "title": "Predict Your Fruit Quickly"
   },
   "host": "localhost",
-  "basePath": "/v1",
   "tags": [
     {
       "name": "auth",
@@ -40,22 +39,48 @@
             {
               "in": "body",
               "name": "body",
-              "description": "User credentials",
+              "description": "User registration details",
               "required": true,
-              "schema": {
-                "$ref": "#/definitions/AuthRequest"
+              "schema":  {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The user's username"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The user's password"
+                  }
+                },
+                "required": ["username", "password"]
               }
             }
           ],
           "responses": {
             "200": {
-              "description": "successful operation",
+              "description": "Success login successful",
               "schema": {
-                "$ref": "#/definitions/AuthResponse"
+              "type": "object",
+              "properties": {
+                "message":{
+                  "type": "string",
+                  "example": "User Success login successful"
+                }
               }
+            }
             },
-            "400": {
-              "description": "Invalid username/password supplied"
+            "401":{
+              "description": "Invalid username or password",
+              "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Invalid username or password"
+                }
+              }
+            }
             }
           }
         }
@@ -80,315 +105,51 @@
               "name": "body",
               "description": "User registration details",
               "required": true,
-              "schema": {
-                "$ref": "#/definitions/User"
+              "schema":  {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The user's username"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The user's password"
+                  }
+                },
+                "required": ["username", "password"]
               }
             }
           ],
           "responses": {
-            "200": {
-              "description": "successful operation",
+            "201": {
+              "description": "Success registration",
               "schema": {
-                "$ref": "#/definitions/AuthResponse"
+              "type": "object",
+              "properties": {
+                "message":{
+                  "type": "string",
+                  "example": "User registered successfully"
+                }
               }
+            }
             },
-            "400": {
-              "description": "Invalid input"
+            "401":{
+              "description": "User already exists",
+              "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "User already exists"
+                }
+              }
+            }
             }
           }
         }
       },
-    "/pet/{petId}/uploadImage": {
-      "post": {
-        "tags": [
-          "fruit"
-        ],
-        "summary": "uploads an image",
-        "description": "",
-        "operationId": "uploadFile",
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of pet to update",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "additionalMetadata",
-            "in": "formData",
-            "description": "Additional data to pass to server",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "file",
-            "in": "formData",
-            "description": "file to upload",
-            "required": false,
-            "type": "file"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/ApiResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      }
-    },
-    "/pet": {
-      "post": {
-        "tags": [
-          "fruit"
-        ],
-        "summary": "Add a new pet to the store",
-        "description": "",
-        "operationId": "addPet",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Pet object that needs to be added to the store",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Pet"
-            }
-          }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "fruit"
-        ],
-        "summary": "Update an existing pet",
-        "description": "",
-        "operationId": "updatePet",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Pet object that needs to be added to the store",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Pet"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Pet not found"
-          },
-          "405": {
-            "description": "Validation exception"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      }
-    },
-    "/pet/findByStatus": {
-      "get": {
-        "tags": [
-          "fruit"
-        ],
-        "summary": "Finds Pets by status",
-        "description": "Multiple status values can be provided with comma separated strings",
-        "operationId": "findPetsByStatus",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Status values that need to be considered for filter",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "available",
-                "pending",
-                "sold"
-              ],
-              "default": "available"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Pet"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid status value"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ]
-      }
-    },
-    "/pet/findByTags": {
-      "get": {
-        "tags": [
-          "fruit"
-        ],
-        "summary": "Finds Pets by tags",
-        "description": "Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
-        "operationId": "findPetsByTags",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "tags",
-            "in": "query",
-            "description": "Tags to filter by",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Pet"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid tag value"
-          }
-        },
-        "security": [
-          {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
-          }
-        ],
-        "deprecated": true
-      }
-    },
-    "/pet/{petId}": {
-      "get": {
-        "tags": [
-          "fruit"
-        ],
-        "summary": "Find pet by ID",
-        "description": "Returns a single pet",
-        "operationId": "getPetById",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of pet to return",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Pet"
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Pet not found"
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
-      },
+    "/predict": {
       "post": {
         "tags": [
           "fruit"
@@ -405,218 +166,118 @@
         ],
         "parameters": [
           {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of pet that needs to be updated",
+            "name": "image",
+            "in": "formData",
+            "description": "image that will be predict",
             "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "name",
-            "in": "formData",
-            "description": "Updated name of the pet",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "formData",
-            "description": "Updated status of the pet",
-            "required": false,
-            "type": "string"
+            "type": "file"
           }
         ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
+        "responses":  {
+          "200": {
+            "description": "Success get last prediction",
+            "schema": {
+            "type": "object",
+            "properties": {
+              "predicted":{
+                "type": "string",
+                "example": "fresh_strawberry"
+              },
+              "message": {
+                "type": "string",
+                "example": "Image has already been predicted"
+              },
+              "timestamp":{
+                "type": "string",
+                "example": "Jun 12, 2024, 12:33:18.700 PM"
+              }
+            }
+          }
+          },
+          "403":{
+            "description": "JWT token required to access this endpoint. Format: 'Bearer {token}'",
+            "schema": {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "string",
+                "example": "JWT token required"
+              }
+            }
+          }
           }
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "jwt": []
           }
         ]
-      },
-      "delete": {
+      }
+    },
+    "/history": {
+      "get": {
         "tags": [
           "fruit"
         ],
-        "summary": "Deletes a pet",
+        "summary": "Get last history of prediction",
         "description": "",
-        "operationId": "deletePet",
+        "operationId": "getHistoryPrediction",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
         "produces": [
           "application/json",
           "application/xml"
         ],
-        "parameters": [
-          {
-            "name": "api_key",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "petId",
-            "in": "path",
-            "description": "Pet id to delete",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
+        "parameters": [],
         "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
+          "200": {
+            "description": "Success get last prediction",
+            "schema": {
+            "type": "object",
+            "properties": {
+              "predicted": {
+                "type": "string",
+                "example": "fresh_strawberry"
+              },
+              "timestamp": {
+                "type": "string",
+                "example": "Jun 12, 2024, 12:33:18.700 PM"
+              }
+            }
+          }
           },
-          "404": {
-            "description": "Pet not found"
+          "403":{
+            "description": "JWT token required to access this endpoint. Format: 'Bearer {token}'",
+            "schema": {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "string",
+                "example": "JWT token required"
+              }
+            }
+          }
           }
         },
         "security": [
           {
-            "petstore_auth": [
-              "write:pets",
-              "read:pets"
-            ]
+            "jwt": []
           }
         ]
       }
     }
   },
   "securityDefinitions": {
-    "api_key": {
-      "type": "apiKey",
-      "name": "api_key",
-      "in": "header"
-    },
-    "petstore_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://petstore.swagger.io/oauth/authorize",
-      "flow": "implicit",
-      "scopes": {
-        "read:pets": "read your pets",
-        "write:pets": "modify pets in your account"
-      }
-    }
+  "jwt": {
+    "type": "apiKey",
+    "name": "Authorization",
+    "in": "header",
+    "description": "JWT token required to access this endpoint. Format: 'Bearer {token}'"
+  }
   },
   "definitions": {
-    "ApiResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "type": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "AuthRequest": {
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "username",
-          "password"
-        ]
-      },
-      "AuthResponse": {
-        "type": "object",
-        "properties": {
-          "token": {
-            "type": "string"
-          },
-          "expiresIn": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-    "Predict": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "petId": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "quantity": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "shipDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "status": {
-          "type": "string",
-          "description": "Order Status",
-          "enum": [
-            "placed",
-            "approved",
-            "delivered"
-          ]
-        },
-        "complete": {
-          "type": "boolean"
-        }
-      },
-      "xml": {
-        "name": "Order"
-      }
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "username": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "userStatus": {
-          "type": "integer",
-          "format": "int32",
-          "description": "User Status"
-        }
-      },
-      "xml": {
-        "name": "User"
-      }
-    }
+    
   },
   "externalDocs": {
     "description": "Find out more about Swagger",

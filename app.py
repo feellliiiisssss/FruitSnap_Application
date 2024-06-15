@@ -122,7 +122,7 @@ def predict_image(current_user):
         # save to firestore as history 
         add_data('history', f"{current_user['username']}", { 'predicted': class_name, 'timestamp': datetime.datetime.utcnow()})
 
-        return jsonify({ 'message': 'Image has already been predicted', 'statusCode': 200 }), 200
+        return jsonify({ 'predicted': class_name, 'message': 'Image has already been predicted', 'timestamp': datetime.datetime.utcnow() }), 200
     except Exception as err:
         # error
         print(err)
@@ -130,7 +130,7 @@ def predict_image(current_user):
 
 
 def load_model():
-    model_path = 'model/FruitSnap_model.h5'
+    model_path = 'https://storage.googleapis.com/capstone-2024-fruit/FruitSnap_model.h5'
     print('Loading model from:', model_path)
     try:
         model = tf.keras.models.load_model(model_path)
