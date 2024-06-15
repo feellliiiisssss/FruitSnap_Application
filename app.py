@@ -132,6 +132,9 @@ def predict_image(current_user):
 def load_model():
     url_path = 'https://storage.googleapis.com/capstone-2024-fruit/FruitSnap_model.h5'
     model_path = 'model/FruitSnap_model.h5'
+
+    tf.keras.utils.get_file(model_path, url_path)
+
     print('Loading model from:', model_path, url_path)
     try:
         model = tf.keras.models.load_model(model_path)
