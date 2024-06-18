@@ -4,7 +4,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href=''><img src='' type='image' alt="Logo"></a>
+  <a href=''><img src='https://github.com/Eislax/FruitSnap-ML/blob/main/Assets/logoCapStone.png' type='image' alt="Logo"></a>
 
   <h1 align="center">FruitSnap</h1>
   <h2 align="center">Empowering Freshness, Ensuring Quality</h2>
