@@ -3,3 +3,5 @@ __pycache__
 .env
 credentials.json
 config/config.json
+venv
+*.h5
