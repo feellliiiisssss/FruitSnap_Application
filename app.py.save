@@ -18,7 +18,6 @@ import io
 version_api = 'v1'
 
 app = Flask(__name__)
-# app.config.from_pyfile('config.py')
 model = None
 CLASS_NAME = ['fresh_apples','fresh_banana','fresh_orange','fresh_strawberry','rotten_apples','rotten_banana','rotten_orange','rotten_strawberry']
 
@@ -34,36 +33,6 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 )
 
 app.register_blueprint(swaggerui_blueprint)
-
-@app.before_first_request
-def initialize_model():
-    load_model()
-
-def load_model():
-    global model
-    url_path = 'https://storage.googleapis.com/capstone-2024-fruit/FruitSnap_model.h5'
-    model_dir = 'model'
-    model_filename = 'FruitSnap_model.h5'
-    model_path = os.path.join(os.getcwd(), model_dir, model_filename)
-
-    # Ensure the model directory exists
-    if not os.path.exists(model_dir):
-        os.makedirs(model_dir)
-
-    # Download the model file if it does not exist
-    if not os.path.isfile(model_path):
-        tf.keras.utils.get_file(fname=model_filename, origin=url_path, cache_dir=model_dir, cache_subdir='.')
-
-    print('Loading model from:', model_path)
-    try:
-        model = tf.keras.models.load_model(model_path)
-        print('Model loaded successfully')
-        return model
-    except Exception as error:
-        print('Failed to load model:', error)
-        raise error
-
-#model = None
 
 @app.errorhandler(APIException)
 def handle_exception(error):
@@ -130,10 +99,7 @@ def preprocess_image(image_bytes):
 @app.route('/predict', methods=['POST'])
 @require_authentication
 def predict_image(current_user):
-    global model
     try :
-        if model is None:
-            return jsonify({"error": "Model not loaded"}), 500
         # load model from file (local) -> done
         # get image request
         if 'image' not in request.files:
@@ -154,33 +120,21 @@ def predict_image(current_user):
         class_name = CLASS_NAME[predicted_index]
 
         # save to firestore as history 
-        add_data('history', current_user["username"], { 'predicted': class_name, 'timestamp': datetime.datetime.utcnow()})
+        add_data('history', f"{current_user['username']}", { 'predicted': class_name, 'timestamp': datetime.datetime.utcnow()})
 
         return jsonify({ 'predicted': class_name, 'message': 'Image has already been predicted', 'timestamp': datetime.datetime.utcnow() }), 200
     except Exception as err:
         # error
-	# app.logger.error(f"Error occurred: {err}")
-        # Return a JSON response with the error message and a 401 status code
-        return jsonify({"error": str(err)}), 401
-        # print(err)
-	# return jsonify({ 'error': err }), 401
+        print(err)
+	return jsonify({ error: err }), 401
         # raise APIException('Could not predict image', 401)
 
 
 def load_model():
-    global model
     url_path = 'https://storage.googleapis.com/capstone-2024-fruit/FruitSnap_model.h5'
-    model_dir = 'model'
-    model_filename = 'FruitSnap_model.h5'
-    model_path = os.path.join(os.getcwd(), model_dir, model_filename)
+    model_path = '/model/FruitSnap_model.h5'
 
-    # Ensure the model directory exists
-    if not os.path.exists(model_dir):
-        os.makedirs(model_dir)
-
-    # Download the model file if it does not exist
-    if not os.path.isfile(model_path):
-        tf.keras.utils.get_file(fname=model_filename, origin=url_path, cache_dir=model_dir, cache_subdir='.')
+    # tf.keras.utils.get_file(model_path, url_path)
 
     print('Loading model from:', model_path)
     try:
@@ -196,9 +150,6 @@ def load_model():
 if __name__ == '__main__':
     try:
         model = load_model()
-        print("haha")
         app.run(host='0.0.0.0', debug=True)
     except Exception as e:
-	# print(e)
-        print("haha")
-        # print(f"Application failed to start: {e}")
+        print(f"Application failed to start: {e}")

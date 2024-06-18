@@ -13,7 +13,7 @@ class AuthMiddleware:
         try:
             return jwt.decode(token, secret, algorithms=["HS256"])
         except Exception as e:
-            raise Exception('Token not valid')
+            raise APIException('Unauthorized - Token Not Valid', 403)
 
     def authenticate(self):
         auth_token = request.headers.get('Authorization')
