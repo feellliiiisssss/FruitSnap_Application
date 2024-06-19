@@ -46,9 +46,8 @@
 <br>
 
 ## About The Project
-<p>Test</p>
-<p>Test</p>
-<p>Test</p>
+<p>In the fruit industry, assessing fruit condition is crucial yet plagued by issues like inconsistent inspections, unreliable accuracy from manual processes, and high rejection rates due to rot. By 2050, the world's population is expected to surge by 40% to 9.7 billion, doubling the demand for fruits. However, agricultural employment is projected to halve, resulting in a shortage of 5 million harvesters. Compounding these challenges is the current reality that over 50% of fruits and vegetables go to waste due to inefficient and inaccurate distribution. </p>
+<p>With those issues in mind, we aim to address these challenges by developing an application called "FruitSnap" for an automated system to detect fresh and rotten fruits using image analysis in machine learning techniques. Apart from classifying fruit, this application can also provide users with tips on how to properly maintain fruit.</p>
 
 ## Documentation
 You can find our relevant documentation at the following link:
