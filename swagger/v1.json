@@ -21,7 +21,7 @@
     "http"
   ],
   "paths": {
-    "/auth/login": {
+    "/login": {
         "post": {
           "tags": [
             "auth"
@@ -85,7 +85,7 @@
           }
         }
       },
-    "/auth/registration": {
+    "/registration": {
         "post": {
           "tags": [
             "auth"
