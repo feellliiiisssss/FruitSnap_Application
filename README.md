@@ -61,7 +61,7 @@ You can find our relevant documentation at the following link:
 
 ### Cloud Computing
 
-- [Cloud Computing Documentation]()
+- [Cloud Computing Documentation](https://github.com/Eislax/FruitSnap_Application/tree/main/CC)
 
 ### Mobile Development
 
