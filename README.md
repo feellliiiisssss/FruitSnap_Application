@@ -79,7 +79,8 @@ You can find our relevant documentation at the following link:
 | Dawson Flannery Susanto           | <a href="https://www.linkedin.com/in/dawson-flannery-susanto/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a> |
 | Raihan Fauzi                      | <a href=""><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>                                                     |
 
-# Authentication
+# Cloud Computing FruitSnap Documentation
+## Authentication
 
 ### **Sign Up - Registration new user**
 
