@@ -1,0 +1,2 @@
+APP_DATABASE=your-database-name-default-if-null
+SECRET_KEYSECRET_KEY=salt-key

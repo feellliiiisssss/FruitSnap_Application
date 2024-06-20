@@ -1,0 +1,286 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is our api documentation official version to classify fruit",
+    "version": "1.0.0",
+    "title": "Predict Your Fruit Quickly"
+  },
+  "host": "localhost",
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Operations about authentication"
+    },
+    {
+      "name": "fruit",
+      "description": "Everything about your fruit"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/login": {
+        "post": {
+          "tags": [
+            "auth"
+          ],
+          "summary": "User login",
+          "description": "Authenticate user with username and password",
+          "operationId": "loginUser",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User registration details",
+              "required": true,
+              "schema":  {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The user's username"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The user's password"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success login successful",
+              "schema": {
+              "type": "object",
+              "properties": {
+                "message":{
+                  "type": "string",
+                  "example": "User Success login successful"
+                }
+              }
+            }
+            },
+            "401":{
+              "description": "Invalid username or password",
+              "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Invalid username or password"
+                }
+              }
+            }
+            }
+          }
+        }
+      },
+    "/registration": {
+        "post": {
+          "tags": [
+            "auth"
+          ],
+          "summary": "User registration",
+          "description": "Register a new user",
+          "operationId": "registerUser",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User registration details",
+              "required": true,
+              "schema":  {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "description": "The user's username"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The user's password"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Success registration",
+              "schema": {
+              "type": "object",
+              "properties": {
+                "message":{
+                  "type": "string",
+                  "example": "User registered successfully"
+                }
+              }
+            }
+            },
+            "401":{
+              "description": "User already exists",
+              "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "example": "User already exists"
+                }
+              }
+            }
+            }
+          }
+        }
+      },
+    "/predict": {
+      "post": {
+        "tags": [
+          "fruit"
+        ],
+        "summary": "Updates a pet in the store with form data",
+        "description": "",
+        "operationId": "updatePetWithForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "image",
+            "in": "formData",
+            "description": "image that will be predict",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses":  {
+          "200": {
+            "description": "Success get last prediction",
+            "schema": {
+            "type": "object",
+            "properties": {
+              "predicted":{
+                "type": "string",
+                "example": "fresh_strawberry"
+              },
+              "message": {
+                "type": "string",
+                "example": "Image has already been predicted"
+              },
+              "timestamp":{
+                "type": "string",
+                "example": "Jun 12, 2024, 12:33:18.700 PM"
+              }
+            }
+          }
+          },
+          "403":{
+            "description": "JWT token required to access this endpoint. Format: 'Bearer {token}'",
+            "schema": {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "string",
+                "example": "JWT token required"
+              }
+            }
+          }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/history": {
+      "get": {
+        "tags": [
+          "fruit"
+        ],
+        "summary": "Get last history of prediction",
+        "description": "",
+        "operationId": "getHistoryPrediction",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success get last prediction",
+            "schema": {
+            "type": "object",
+            "properties": {
+              "predicted": {
+                "type": "string",
+                "example": "fresh_strawberry"
+              },
+              "timestamp": {
+                "type": "string",
+                "example": "Jun 12, 2024, 12:33:18.700 PM"
+              }
+            }
+          }
+          },
+          "403":{
+            "description": "JWT token required to access this endpoint. Format: 'Bearer {token}'",
+            "schema": {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "string",
+                "example": "JWT token required"
+              }
+            }
+          }
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+  "jwt": {
+    "type": "apiKey",
+    "name": "Authorization",
+    "in": "header",
+    "description": "JWT token required to access this endpoint. Format: 'Bearer {token}'"
+  }
+  },
+  "definitions": {
+    
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
