@@ -1,0 +1,9 @@
+jwt
+Flask
+flask-swagger-ui
+firebase-admin
+uuid
+numpy
+Pillow
+tensorflow
+python-dotenv
