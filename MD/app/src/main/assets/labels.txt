@@ -1,0 +1,8 @@
+freshapples
+freshbanana
+freshoranges
+freshstrawberry
+rottenaples
+rottenbanana
+rottenoranges
+rottenstrawberry

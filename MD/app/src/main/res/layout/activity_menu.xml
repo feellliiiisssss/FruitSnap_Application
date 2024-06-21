@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/bg"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+    <ImageView
+        android:id="@+id/logoA"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@mipmap/analyze"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <TextView
+        android:id="@+id/judulA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ANALISA BUAH"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        app:layout_constraintTop_toBottomOf="@id/logoA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"/>
+
+        <ImageView
+            android:id="@+id/logoB"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@mipmap/tips"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/judulA"
+            android:layout_marginTop="25dp"/>
+        <TextView
+            android:id="@+id/judulB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TIPS BUAH"
+            android:layout_marginTop="15dp"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@id/logoB"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:gravity="center"/>
+
+        <ImageView
+            android:id="@+id/logoC"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
+            android:src="@mipmap/info"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/judulB"
+            android:layout_marginTop="25dp"/>
+        <TextView
+            android:id="@+id/judulC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tentang Aplikasi"
+            android:layout_marginTop="15dp"
+            android:textSize="20dp"
+            app:layout_constraintTop_toBottomOf="@id/logoC"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:gravity="center"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

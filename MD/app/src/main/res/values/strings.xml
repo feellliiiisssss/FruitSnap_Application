@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">FruitSnap</string>
+    <string name="camera">TAKE A PHOTO</string>
+    <string name="galery">UPLOAD IMAGE</string>
+    <string name="alert_ok">SAYA MENGERTI!</string>
+    <string name="perhatian_1">- Pastikan melakukan pemotretan foto buah dengan angle yang sesuai</string>
+    <string name="perhatian_2">- Pastikan pencahayaan bagus</string>
+    <string name="perhatian_3">- Pastikan foto hanya buah apel, pisang, jeruk, stroberi</string>
+    <string name="preview">IMAGE PREVIEW</string>
+    <string name="predict">ANALISA</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="about">"In the fruit industry, assessing fruit condition is crucial yet plagued by issues like inconsistent inspections, unreliable accuracy from manual processes, and high rejection rates due to rot. By 2050, the world's population is expected to surge by 40% to 9.7 billion, doubling the demand for fruits. However, agricultural employment is projected to halve, resulting in a shortage of 5 million harvesters. Compounding these challenges is the current reality that over 50% of fruits and vegetables go to waste due to inefficient and inaccurate distribution.
+
+With those issues in mind, we aim to address these challenges by developing an application called "FruitSnap" for an automated system to detect fresh and rotten fruits using image analysis in machine learning techniques. Apart from classifying fruit, this application can also provide users with tips on how to properly maintain fruit."</string>
+
+    <string-array name="data_judul">
+        <item>Cara Menyimpan Buah agar Segar dan Tahan Lama Tanpa Kulkas</item>
+        <item>Buah Ini Tidak Boleh Disimpan Sembarangan!</item>
+        <item>Langkah-Langkah Membuat Pupuk Organik dari Buah Busuk</item>
+    </string-array>
+
+    <string-array name="data_description">
+        <item>Buah merupakan sumber makanan penting yang kaya akan serat dan vitamin. Sebagai asupan harian, menjaga buah tetap segar dan layak dikonsumsi menjadi sangat penting.
+Selama ini kita kerap menyimpan buah di kulkas atau pendingin agar lebih awet dan tahan lama. Namun, apa yang terjadi jika tidak ada lemari pendingin?
+Berikut adalah cara menyimpan buah segar agar awet tanpa kulkas:
+Hindari memar saat memilih buah
+Pastikan buah tidak memiliki memar yang bisa membuatnya mudah busuk. Kemudian, sebelum menyimpannya, pastikan membawa buah dengan lapisan yang berfungsi sebagai bantalan dan sirkulasi udara yang cukup. Hal ini untuk menghindari memar pada buah saat proses pengangkutan atau akan memindahkannya ke tempat penyimpanan.
+Cuci sebelum disimpan
+Beberapa buah tidak perlu dicuci sebelum disimpan. Namun untuk buah dengan kulit tipis atau kecil seperti stroberi dan anggur, perlu dicuci. Pisahkan buah yang rusak karena akan membuat buah lain yang masih baik jadi cepat busuk.
+Tempat penyimpanan
+Melansir Theboatgalley.com, tempat penyimpanan buah harus kering dan memiliki sirkulasi udara yang baik. Simpan buah sedemikian rupa dan hindari memar dengan cara memberi alas atau lapisan lembut. Jika ada satu buah yang memar di tempat penyimpanan, segera jauhkan dari buah lainnya.
+Jangan disimpan dalam plastik, karena plastik akan memerangkap kelembaban baik dari kondensasi atau sisa pencucian. Akibatnya, buah mudah busuk.
+</item>
+        <item>Jenis buah juga perlu diperhatikan saat menyimpan buah tanpa kulkas. Perhatikan jenis-jenis buah berikut dan cara menyimpannya:
+Buah penghasil gas etilen
+Buah-buahan seperti alpukat, pisang, kiwi, mangga, pir, plum, dan tomat, menghasilkan gas yang disebut etilen saat matang. Gas ini dapat mematangkan buah lain yang sensitif terhadapnya sebelum waktunya. Oleh sebab itu, jauhkan makanan penghasil etilen dari makanan sensitif etilen seperti apel dan semangka di tempat yang berbeda.
+Jeruk dan sejenisnya
+Untuk buah seperti jeruk, lemon dan sejenisnya bisa bertahan lebih lama dari buah lainnya. Jika dibiarkan terbuka, buah sejenis jeruk akan bertahan rata-rata satu minggu hingga 10 hari. Jamur kecil pada kulit dapat dibersihkan dengan larutan pemutih ringan. Buah ini bisa bertahan beberapa minggu hingga satu bulan jika disimpan dalam kertas timah. Namun pastikan buah benar-benar kering.
+Nanas Potong
+Bagian atas nanas yang berdaun dan simpan nanas secara terbalik. Ini membantu mendistribusikan kembali gula yang tenggelam ke dasar dan juga membantunya bertahan lebih lama. Sementara, nanas yang masih hijau akan bertahan hingga 2 minggu.
+</item>
+        <item>Pupuk organik sering disebut pula sebagai kompos. Pada umumnya Pupuk Organik Cair (POC) aman bagi tanah dan tanaman meskipun digunakan sesering mungkin. Selain itu, POC  juga dapat dimanfaatkan sebagai aktivator untuk membuat kompos (Lingga dan Marsono, 2003).
+Pupuk organik cair juga dapat meningkatkan vigor tanaman sehingga tanaman menjadi kokoh dan kuat, meningkatkan daya tahan tanaman terhadap kekeringan, merangsang pertumbuhan cabang produksi, meningkatkan pembentukan bunga dan bakal buah, mengurangi gugurnya bunga, dan bakal buah (Huda, 2013).
+Bahan + Alat:
+Buah-buahan yang sudah busuk atau limbah buah seperti kulit buah-buahan yang dikupas oleh tukang buah seperti nanas, pepaya, pisang, dan lain-lain.
+Siapkan pula gula merah, air kelapa, gula pasir, atau perasan air batang tebu.
+Komposter (wadah berlangsungnya proses pembuatan POC). Komposter dapat menggunakan drum plastik atau kaleng cat bekas ukuran 25 kg.
+Cara Membuat
+Siapkan 5-10 liter air cucian beras.
+Larutkan 2 potong gula merah atau 2 sendok makan gula pasir.
+Masukkan larutan ke komposter, tambahkan buah busuk yang dihancurkan.
+Aduk hingga rata, tutup komposter, biarkan udara masuk.
+Fermentasi dua minggu, cek aroma, saring POC.
+</item>
+    </string-array>
+
+    <integer-array name="data_gambar">
+        <item>@drawable/a1</item>
+        <item>@drawable/a2</item>
+        <item>@drawable/a3</item>
+    </integer-array>
+
+    <string-array name="tanggal">
+        <item>06/06/2021</item>
+        <item>06/06/2021</item>
+        <item>10/01/2023</item>
+    </string-array>
+
+</resources>
